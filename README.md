@@ -1,29 +1,34 @@
 redisurl
 ========
 
-Connect to Redis using a REDIS_URL and the redigo client.
+Connect to Redis using a `REDIS_URL` and the redigo client.
 
 Usage
 =====
 
-It uses Redigo[1] under the hood:
+It uses [Redigo][redigo] under the hood:
 
-    import "redisurl"
+```go
+import "redisurl"
 
-    # Connect using os.Getenv("REDIS_URL").
-    c, err := redisurl.Connect()
+// Connect using os.Getenv("REDIS_URL").
+c, err := redisurl.Connect()
 
-    # Alternatively, connect using a custom Redis URL.
-    c, err := redisurl.ConnectToURL("redis://...")
+// Alternatively, connect using a custom Redis URL.
+c, err := redisurl.ConnectToURL("redis://...")
+```
 
-In both cases you will get the result values of `redis.Dial(...)`,
-that is, an instance of `redis.Conn` and an error.
+In both cases you will get the result values of calling
+`redis.Dial(...)`, that is, an instance of `redis.Conn` and an
+error.
+
+[redigo]: https://github.com/garyburd/redigo
 
 Installation
 ============
 
 Install it using the "go get" command:
 
-go get github.com/soveran/redisurl
+    go get github.com/soveran/redisurl
 
 
