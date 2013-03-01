@@ -1,7 +1,7 @@
 redisurl
 ========
 
-Connect to Redis using a `REDIS_URL` and the redigo client.
+Connect to Redis using a `REDIS_URL`.
 
 Usage
 =====
