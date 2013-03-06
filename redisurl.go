@@ -12,14 +12,16 @@ func Connect() (redis.Conn, error) {
 }
 
 func ConnectToURL(s string) (c redis.Conn, err error) {
-	redis_url, _ := url.Parse(s)
+	redisURL, _ := url.Parse(s)
 	auth := ""
 
-	if password, ok := redis_url.User.Password(); ok {
-		auth = password
+	if redisURL.User != nil {
+		if password, ok := redisURL.User.Password(); ok {
+			auth = password
+		}
 	}
 
-	c, err = redis.Dial("tcp", redis_url.Host)
+	c, err = redis.Dial("tcp", redisURL.Host)
 
 	if err != nil {
 		fmt.Println(err)
