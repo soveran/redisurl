@@ -33,7 +33,7 @@ func ConnectToURL(s string) (c redis.Conn, err error) {
 		return
 	}
 
-	if auth != "" {
+	if len(auth) > 0 {
 		_, err = c.Do("AUTH", auth)
 
 		if err != nil {
