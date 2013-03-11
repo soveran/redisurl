@@ -12,7 +12,12 @@ func Connect() (redis.Conn, error) {
 }
 
 func ConnectToURL(s string) (c redis.Conn, err error) {
-	redisURL, _ := url.Parse(s)
+	redisURL, err := url.Parse(s)
+
+	if err != nil {
+		return
+	}
+
 	auth := ""
 
 	if redisURL.User != nil {
