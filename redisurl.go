@@ -4,6 +4,7 @@ import (
 	"os"
 	"fmt"
 	"net/url"
+	"strings"
 	"github.com/garyburd/redigo/redis"
 )
 
@@ -40,6 +41,10 @@ func ConnectToURL(s string) (c redis.Conn, err error) {
 			fmt.Println(err)
 			return
 		}
+	}
+
+	if db := strings.Split(redisURL.Path, "/")[1]; db != "" {
+		c.Do("SELECT", db)
 	}
 
 	return
