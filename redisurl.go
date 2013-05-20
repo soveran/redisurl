@@ -43,7 +43,8 @@ func ConnectToURL(s string) (c redis.Conn, err error) {
 		}
 	}
 
-	if db := strings.Split(redisURL.Path, "/")[1]; db != "" {
+	if len(redisURL.Path) > 1 {
+		db := strings.TrimPrefix(redisURL.Path, "/")
 		c.Do("SELECT", db)
 	}
 
