@@ -1,10 +1,11 @@
 package redisurl
 
 import (
-	"os"
 	"fmt"
 	"net/url"
+	"os"
 	"strings"
+
 	"github.com/garyburd/redigo/redis"
 )
 
@@ -12,7 +13,7 @@ func Connect() (redis.Conn, error) {
 	return ConnectToURL(os.Getenv("REDIS_URL"))
 }
 
-func ConnectToURL(s string) (c redis.Conn, err error) {
+func ConnectToURL(s string, options ...redis.DialOption) (c redis.Conn, err error) {
 	redisURL, err := url.Parse(s)
 
 	if err != nil {
@@ -27,7 +28,7 @@ func ConnectToURL(s string) (c redis.Conn, err error) {
 		}
 	}
 
-	c, err = redis.Dial("tcp", redisURL.Host)
+	c, err = redis.Dial("tcp", redisURL.Host, options...)
 
 	if err != nil {
 		fmt.Println(err)
