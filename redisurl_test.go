@@ -1,9 +1,10 @@
 package redisurl_test
 
 import (
-	"github.com/soveran/redisurl"
-	"github.com/garyburd/redigo/redis"
 	"testing"
+
+	"github.com/gomodule/redigo/redis"
+	"github.com/soveran/redisurl"
 )
 
 func TestConnect(t *testing.T) {
