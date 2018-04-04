@@ -27,7 +27,13 @@ func ConnectToURL(s string) (c redis.Conn, err error) {
 		}
 	}
 
-	c, err = redis.Dial("tcp", redisURL.Host)
+	options := []redis.DialOption{}
+
+	if redisURL.Scheme == "rediss" {
+		options = append(options, redis.DialUseTLS(true))
+	}
+
+	c, err = redis.Dial("tcp", redisURL.Host, options...)
 
 	if err != nil {
 		fmt.Println(err)
